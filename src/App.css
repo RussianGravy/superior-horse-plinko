@@ -33,6 +33,8 @@
 .plinko-side {
   position: relative;
   overflow: hidden;
+  /* Lets .horse-fall measure the full column height with cqh */
+  container-type: size;
   /* Two staggered peg layers: 2 pegs on even rows, 1 centered peg on odd rows */
   background-image:
     radial-gradient(circle at 65px 60px, var(--peg-red) 0 28px, #000 29px 31px, transparent 32px),
@@ -41,11 +43,10 @@
   background-repeat: space repeat;
 }
 
-/* Keeps the falling horses on screen while the page scrolls */
+/* Covers the whole column so horses fall the full length of the page */
 .horse-viewport {
-  position: sticky;
-  top: 0;
-  height: 100vh;
+  position: absolute;
+  inset: 0;
   overflow: hidden;
   pointer-events: none;
 }
@@ -69,7 +70,7 @@
 
 @keyframes horse-fall {
   from { transform: translateY(-220px); }
-  to   { transform: translateY(calc(100vh + 20px)); }
+  to   { transform: translateY(calc(100cqh + 20px)); }
 }
 
 /* Knocks the horse between pegs as it falls */

@@ -4,25 +4,18 @@ export default function Home() {
   return (
     <>
       <section className="news-box">
-        <h2>Horse plinko news</h2>
-        <p>new games, media, or website changes</p>
+        <h2>Horse Plinko News</h2>
+        <p>New horseplinko.com coming soon!</p>
       </section>
 
       <section className="about">
         <h2 className="about-title">About</h2>
         <div className="about-body">
-          <p>what is horse plinko?</p>
-          <p>what is our story?</p>
-          <p>Why is horse plinko so great?</p>
+          <p>Horse Plinko is horses falling down a plinko. Thats about it.</p>
+          <p>I love Horse Plinko.</p>
+          <p>Horse Plinko is great because everybody wants to see horses falling down a plinko.</p>
           <p>
-            blah blah blahblah blah blahblah blah blahblah blah blahblah blah
-            blahblah blah blahblah blah blahblah blah blahblah blah blahblah
-            blah blahblah blah blahblah blah blahblah blah blahblah blah
-            blahblah blah blahblah blah blahblah blah blahblah blah blah blah
-            blahblah blah blahblah blah blahblah blah blahblah blah blahblah
-            blah blahblah blah blahblah blah blahblah blah blahblah blah
-            blahblah blah blahblah blah blahblah blah blah blah blah blahblah
-            blah blah
+            Horse Plinko is great. All hail.
           </p>
         </div>
       </section>
