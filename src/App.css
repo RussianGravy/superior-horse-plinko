@@ -1,0 +1,290 @@
+:root {
+  --peg-red: #e8473d;
+  --panel-gray: #cbd1d9;
+  --footer-gray: #d9d9d9;
+  --olive: #8a8a2c;
+  --center-width: 900px;
+}
+
+/* ---------- Page layout: plinko board | content | plinko board ---------- */
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr minmax(0, var(--center-width)) 1fr;
+  min-height: 100vh;
+  background: #fff;
+}
+
+.center-column {
+  display: flex;
+  flex-direction: column;
+  border-left: 3px solid #000;
+  border-right: 3px solid #000;
+  background: #fff;
+}
+
+.page-content {
+  flex: 1;
+  padding: 0 24px;
+}
+
+/* ---------- Side plinko boards ---------- */
+
+.plinko-side {
+  position: relative;
+  overflow: hidden;
+  /* Two staggered peg layers: 2 pegs on even rows, 1 centered peg on odd rows */
+  background-image:
+    radial-gradient(circle at 65px 60px, var(--peg-red) 0 28px, #000 29px 31px, transparent 32px),
+    radial-gradient(circle at 195px 180px, var(--peg-red) 0 28px, #000 29px 31px, transparent 32px);
+  background-size: 260px 240px;
+  background-repeat: space repeat;
+}
+
+/* Keeps the falling horses on screen while the page scrolls */
+.horse-viewport {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.horse-fall {
+  position: absolute;
+  top: 0;
+  animation-name: horse-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.horse-bounce {
+  display: block;
+  width: 180px;
+  animation-name: horse-bounce;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes horse-fall {
+  from { transform: translateY(-220px); }
+  to   { transform: translateY(calc(100vh + 20px)); }
+}
+
+/* Knocks the horse between pegs as it falls */
+@keyframes horse-bounce {
+  0%   { transform: translateX(-40px) rotate(-60deg); }
+  50%  { transform: translateX(10px) rotate(100deg); }
+  100% { transform: translateX(60px) rotate(200deg); }
+}
+
+.side-fire {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  object-position: center bottom;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .horse-fall,
+  .horse-bounce {
+    animation: none;
+  }
+  .horse-fall { top: 30%; }
+}
+
+/* ---------- Header ---------- */
+
+.site-header {
+  padding: 16px 16px 0;
+  text-align: center;
+}
+
+.site-title {
+  margin: 0;
+  font-size: clamp(3rem, 9vw, 6.5rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+}
+
+.site-nav {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.nav-button {
+  padding: 12px 8px;
+  border-radius: 8px;
+  background: var(--panel-gray);
+  color: #000;
+  font-size: 1.25rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: background-color 0.15s;
+}
+
+.nav-button:hover,
+.nav-button.active {
+  background: #b4bcc7;
+}
+
+/* ---------- Home page ---------- */
+
+.news-box {
+  margin: 70px 24px 0;
+  min-height: 290px;
+  padding: 20px;
+  background: var(--panel-gray);
+}
+
+.news-box h2 {
+  margin: 0 0 16px;
+  font-size: 2.6rem;
+  font-weight: 700;
+}
+
+.news-box p {
+  margin: 0;
+  font-size: 1.9rem;
+}
+
+.about {
+  margin-top: 40px;
+}
+
+.about-title {
+  margin: 0 0 24px 32px;
+  font-size: 4.5rem;
+  font-weight: 800;
+}
+
+.about-body p {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* ---------- Footer ---------- */
+
+.credits {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px 64px;
+  margin: 60px 24px 70px;
+  padding: 50px 24px;
+  background: var(--panel-gray);
+  font-size: 1.5rem;
+}
+
+.play-original {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  align-items: center;
+  gap: 24px;
+  padding: 12px 24px 20px;
+  border-top: 3px solid #000;
+  background: var(--footer-gray);
+  color: var(--olive);
+  text-decoration: none;
+}
+
+.play-original-title {
+  margin: 0;
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.play-original:hover .play-original-title {
+  text-decoration: underline;
+}
+
+/* Mock screenshot of the original game */
+.play-original-preview {
+  display: flex;
+  justify-content: center;
+  padding: 12px 0 0;
+  border-top: 12px solid #4a4526;
+  background: #b8b58a;
+}
+
+.preview-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  width: 55%;
+  aspect-ratio: 1.25;
+  padding: 16px;
+  background: #827f2c;
+  color: #111;
+}
+
+.preview-title {
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+
+.preview-button {
+  margin-left: 20%;
+  padding: 2px 8px;
+  width: 35%;
+  background: var(--peg-red);
+  color: #fff;
+  font-size: 0.45rem;
+}
+
+.preview-horse {
+  position: absolute;
+  right: -10%;
+  bottom: 0;
+  width: 70%;
+  filter: brightness(0);
+  transform: scaleX(-1);
+}
+
+/* ---------- Small screens: drop the side boards ---------- */
+
+@media (max-width: 1100px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  .plinko-side {
+    display: none;
+  }
+  .center-column {
+    border: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .site-nav {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .page-content {
+    padding: 0 16px;
+  }
+  .news-box {
+    margin: 40px 0 0;
+  }
+  .news-box h2 { font-size: 1.8rem; }
+  .news-box p { font-size: 1.25rem; }
+  .about-title { margin-left: 0; font-size: 3rem; }
+  .about-body p { font-size: 1.2rem; }
+  .credits { margin: 40px 16px; font-size: 1.1rem; }
+  .play-original { grid-template-columns: 1fr; }
+  .play-original-title { font-size: 2.4rem; }
+}
